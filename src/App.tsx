@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useRef } from "react";
+import Moveable from "react-moveable";
+import "./App.css";
+import { setAlias, Frame } from "scenejs";
+import Guides from "@scena/react-guides";
+import { ref } from "framework-utils";
 
-function App() {
+setAlias("tx", ["transform", "translateX"]);
+setAlias("ty", ["transform", "translateY"]);
+setAlias("tz", ["transform", "translateZ"]);
+setAlias("rotate", ["transform", "rotate"]);
+setAlias("sx", ["transform", "scaleX"]);
+setAlias("sy", ["transform", "scaleY"]);
+setAlias("matrix3d", ["transform", "matrix3d"]);
+
+type GuidesType = {
+  vertical?: Guides;
+  horizontal?: Guides;
+  allResize: () => void;
+};
+
+export default () => {
+  const itemMap: Map<HTMLElement | SVGElement, Frame> = new Map();
+  const guides: GuidesType = {
+    vertical: undefined,
+    horizontal: undefined,
+    allResize() {
+      this.vertical && this.vertical.resize();
+      this.horizontal && this.horizontal.resize();
+      console.log("Resize");
+    },
+  };
+  const refGuideHorizontal = useRef<Guides>(null);
+  const refGuideVertical = useRef<Guides>(null);
+
+  useEffect(() => {
+    guides.allResize();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="con">
+      <div className="guides horizontal">
+        <Guides ref={refGuideHorizontal} />
+      </div>
+      <div className="guides vertical">
+        <Guides ref={refGuideVertical} type="vertical" />
+      </div>
     </div>
   );
-}
-
-export default App;
+};

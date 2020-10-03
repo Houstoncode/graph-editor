@@ -1,0 +1,30 @@
+.left_side {
+  width: 60px;
+  z-index: 20;
+  background-color: #292929;
+  height: 100vh;
+  left: 0;
+  position: absolute;
+
+  ul li:hover {
+    color: #000;
+    // background: #567ad6;
+    // box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
+  }
+
+  ul li a.hover {
+    background: #567ad6;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.4);
+  }
+
+  ul li a img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  &__logo {
+    width: 60px;
+    height: 47px;
+    background-image: url("~@/assets/images/logo.png");
+  }
+}
