@@ -11,6 +11,7 @@ type Props = {
 };
 
 export const LeftSidebar: FC<Props> = ({ state, setState }) => {
+  if (!setState) return null;
   const items = [
     {
       iconSrc: "/img/icons/home.svg",
@@ -21,8 +22,7 @@ export const LeftSidebar: FC<Props> = ({ state, setState }) => {
       iconSrc: "/img/icons/arrow.svg",
       action: (e: MouseEvent, index: number) => {
         e.preventDefault();
-        setState &&
-          setState({ ...state, action: "moveable", cursor: "default" });
+        setState({ ...state, action: "moveable", cursor: "default" });
       },
       defaultAction: "moveable",
       href: "",
@@ -31,12 +31,12 @@ export const LeftSidebar: FC<Props> = ({ state, setState }) => {
       iconSrc: "/img/icons/addRectangle.svg",
       action: (e: MouseEvent, index: number) => {
         e.preventDefault();
-        setState &&
-          setState({
-            ...state,
-            action: "create-rectangle",
-            cursor: "crosshair",
-          });
+
+        setState({
+          ...state,
+          action: "create-rectangle",
+          cursor: "crosshair",
+        });
       },
       defaultAction: "create-rectangle",
       href: "",
@@ -45,8 +45,7 @@ export const LeftSidebar: FC<Props> = ({ state, setState }) => {
       iconSrc: "/img/icons/text.svg",
       action: (e: MouseEvent, index: number) => {
         e.preventDefault();
-        setState &&
-          setState({ ...state, action: "create-text", cursor: "text" });
+        setState({ ...state, action: "create-text", cursor: "text" });
       },
       defaultAction: "create-text",
       href: "",

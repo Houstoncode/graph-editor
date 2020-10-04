@@ -9,16 +9,17 @@ type Props = {
 export const keyController = ({ state, setState }: Props): void => {
   const keycon = new KeyController();
 
-  keycon.keydown("v", (e) => {
-    setState && setState({ ...state, action: "moveable", cursor: "default" });
+  if (!setState) return;
+
+  keycon.keydown("v", () => {
+    setState({ ...state, action: "moveable", cursor: "default" });
   });
 
-  keycon.keydown("t", (e) => {
-    setState && setState({ ...state, action: "create-text", cursor: "text" });
+  keycon.keydown("t", () => {
+    setState({ ...state, action: "create-text", cursor: "text" });
   });
 
-  keycon.keydown("r", (e) => {
-    setState &&
-      setState({ ...state, action: "create-rectangle", cursor: "crosshair" });
+  keycon.keydown("r", () => {
+    setState({ ...state, action: "create-rectangle", cursor: "crosshair" });
   });
 };

@@ -10,6 +10,7 @@ import "./Editor.css";
 import { PanelEditor } from "../PanelEditor/PanelEditor";
 import { checkAction } from "../../utils/checkAction";
 import { entityHandler } from "../../utils/entityHandler";
+import { stat } from "fs";
 
 type GuidesType = {
   vertical: Guides | null;
@@ -35,6 +36,7 @@ export type RightDockItem = {
 
 export type StateType =
   | {
+      currentSelected?: (SVGElement | HTMLElement)[];
       cursor?: CSSProperties["cursor"];
       action?: "create-text" | "create-rectangle" | "moveable" | "rotatable";
       color?: string;
@@ -51,7 +53,6 @@ type Props = {
 };
 
 export const Editor: FC<Props> = ({ state, setState, handleScreen }) => {
-  const [targets, setTargets] = useState<Array<HTMLElement | SVGElement>>();
   const [frameMap] = React.useState(() => new Map());
   const [horizontalGuides, setHorizontalGuides] = useState<number[]>();
   const [verticalGuides, setVerticalGuides] = useState<number[]>();
@@ -68,8 +69,10 @@ export const Editor: FC<Props> = ({ state, setState, handleScreen }) => {
     });
   }, []);
 
-  const { isCreateRectangle } = checkAction;
-  const { createRectangle } = entityHandler;
+  if (!setState) return null;
+
+  const { isCreateRectangle, isCreateText, isRotatable } = checkAction;
+  const { createRectangle, createText } = entityHandler;
 
   return (
     <div className="editor">
@@ -97,11 +100,10 @@ export const Editor: FC<Props> = ({ state, setState, handleScreen }) => {
       <FullScreen
         handle={handleScreen}
         onChange={(status) => {
-          setState &&
-            setState({
-              ...state,
-              rightDock: { ...state?.rightDock, showFullscreen: status },
-            });
+          setState({
+            ...state,
+            rightDock: { ...state?.rightDock, showFullscreen: status },
+          });
         }}
       >
         <div className="editor__inner" style={{ cursor: state?.cursor }}>
@@ -120,10 +122,10 @@ export const Editor: FC<Props> = ({ state, setState, handleScreen }) => {
               snapDigit={100}
               snapThreshold={30}
               isDisplaySnapDigit={true}
-              target={targets}
+              target={state?.currentSelected}
               horizontalGuidelines={horizontalGuides}
               verticalGuidelines={verticalGuides}
-              elementGuidelines={targets}
+              elementGuidelines={state?.currentSelected}
               bounds={{
                 left: 0,
                 right: window.innerWidth - 290,
@@ -195,29 +197,44 @@ export const Editor: FC<Props> = ({ state, setState, handleScreen }) => {
         ratio={0}
         onDragStart={(e) => {
           if (state?.rightDock?.showFullscreen) return;
+          if (isCreateText(state)) {
+            createText(e, { state, setState });
+            return;
+          }
 
           const moveable = moveableRef.current;
           const target = e.inputEvent.target;
+          const { currentSelected } = state || {};
           if (
             (moveable && moveable.isMoveableElement(target)) ||
-            (targets && targets.some((t) => t === target || t.contains(target)))
+            (currentSelected &&
+              currentSelected.some((t) => t === target || t.contains(target)))
           ) {
             e.stop();
+          }
+        }}
+        onDragEnd={(event) => {
+          if (isCreateText(state)) {
+            return;
+          }
+
+          if (isCreateRectangle(state)) {
+            createRectangle(event, { state, setState });
+            return;
           }
         }}
         onSelect={(e) => {
           if (state?.rightDock?.showFullscreen) return;
           if (isCreateRectangle(state)) {
-            setTargets(undefined);
+            setState({ ...state, currentSelected: undefined });
             return;
           }
-          setTargets(e.selected);
+
+          setState({ ...state, currentSelected: e.selected });
         }}
         onSelectEnd={(e) => {
           if (state?.rightDock?.showFullscreen) return;
           if (isCreateRectangle(state)) {
-            console.log("Create rectangle");
-            createRectangle(e, { state, setState });
             return;
           }
           const moveable = moveableRef.current;

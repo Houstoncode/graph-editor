@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC } from "react";
 import { FullScreenHandle } from "react-full-screen";
+import { checkAction } from "../../utils/checkAction";
 import { StateType } from "../Editor/Editor";
 import "./RightSidebar.css";
 
@@ -28,6 +29,8 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
       iconSrc: "/img/icons/right/export.svg",
       label: "Export",
       action: () => {
+        if (!checkAction.isSelectableOneItem(state)) return;
+
         setState &&
           setState({
             ...state,
@@ -44,6 +47,7 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
       iconSrc: "/img/icons/right/transform.svg",
       label: "Transform",
       action: () => {
+        if (!checkAction.isSelectableOneItem(state)) return;
         setState &&
           setState({
             ...state,
@@ -62,6 +66,7 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
       iconSrc: "/img/icons/right/layers.svg",
       label: "Layers",
       action: () => {
+        if (!checkAction.isSelectableOneItem(state)) return;
         console.log("Arrow");
       },
       href: "",
@@ -72,6 +77,7 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
       iconSrc: "/img/icons/right/color-picker.svg",
       label: "Color",
       action: () => {
+        if (!checkAction.isSelectableOneItem(state)) return;
         setState &&
           setState({
             ...state,
@@ -89,6 +95,7 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
       iconSrc: "/img/icons/right/text.svg",
       label: "Font",
       action: () => {
+        if (!checkAction.isSelectableOneItem(state)) return;
         setState &&
           setState({
             ...state,
@@ -105,6 +112,7 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
       iconSrc: "/img/icons/right/link.svg",
       label: "Link",
       action: () => {
+        if (!checkAction.isSelectableOneItem(state)) return;
         console.log("Arrow");
       },
       href: "",
@@ -115,6 +123,7 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
       iconSrc: "/img/icons/right/align.svg",
       label: "Align",
       action: () => {
+        if (!checkAction.isSelectableOneItem(state)) return;
         setState &&
           setState({
             ...state,
@@ -132,6 +141,7 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
       iconSrc: "/img/icons/right/patterns.svg",
       label: "Patterns",
       action: () => {
+        if (!checkAction.isSelectableOneItem(state)) return;
         setState &&
           setState({
             ...state,
@@ -165,7 +175,9 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
               >
                 <a
                   className={`right-sidebar__link ${
-                    item.disabled ? "right-sidebar__link--disabled" : ""
+                    item.disabled || !checkAction.isSelectableOneItem(state)
+                      ? "right-sidebar__link--disabled"
+                      : ""
                   }`}
                 >
                   <div

@@ -13,4 +13,7 @@ export const checkAction = {
   isRotatable: (state: StateType) => {
     return state?.action === "rotatable";
   },
+  isSelectableOneItem: (state: StateType) => {
+    return state?.currentSelected?.length === 1;
+  },
 };

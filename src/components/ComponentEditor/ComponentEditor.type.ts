@@ -2,12 +2,13 @@ import { CSSProperties } from "react";
 
 export type Component = {
   type: "text" | "component";
-  x?: Number;
-  y?: Number;
+  id: string;
+  x?: number;
+  y?: number;
   width?: CSSProperties["width"];
   height?: CSSProperties["height"];
-  borderRadius?: Number;
-  backgroundColor?: String;
+  borderRadius?: number;
+  backgroundColor?: string;
   visibility?: "hidden" | "visible";
   justifyContent?: CSSProperties["justifyContent"];
   alignContent?: CSSProperties["alignContent"];
@@ -17,5 +18,5 @@ export type Component = {
   fontWeight?: CSSProperties["fontWeight"];
   color?: CSSProperties["color"];
   textDecoration?: CSSProperties["textDecoration"];
-  text?: String;
+  text?: string;
 };

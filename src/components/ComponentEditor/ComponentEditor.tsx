@@ -18,6 +18,7 @@ export const ComponentEditor: FC<Props> = ({ component }: Props) => {
   return (
     <div
       className="moveable"
+      id={component.id}
       suppressContentEditableWarning={true}
       contentEditable={isText}
       style={{ ...(cssProps as CSSProperties) }}

@@ -5,12 +5,15 @@ import { Editor, StateType } from "./components/Editor/Editor";
 import { RightSidebar } from "./components/RightSidebar/RightSidebar";
 import { useFullScreenHandle } from "react-full-screen";
 import { keyController } from "./utils/keyController";
+import crypto from "crypto";
+import KeyController from "keycon";
 
 const initialState: StateType = {
   cursor: "default",
   action: "moveable",
   components: [
     {
+      id: crypto.randomBytes(32).toString("hex"),
       x: 150,
       y: 150,
       type: "text",
@@ -23,6 +26,7 @@ const initialState: StateType = {
       alignContent: "center",
     },
     {
+      id: crypto.randomBytes(32).toString("hex"),
       x: 150,
       y: 150,
       type: "component",
@@ -57,6 +61,24 @@ export default () => {
     keyController({ state, setState });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // keycon.keydown("delete", () => {
+  //   const selectComponents = state?.currentSelected;
+  //   if (
+  //     !selectComponents ||
+  //     (selectComponents && selectComponents?.length <= 0)
+  //   )
+  //     return;
+
+  //   const idSelectComponents = selectComponents?.map(
+  //     (selectComponent) => selectComponent.id
+  //   );
+
+  //   const newComponents = state?.components?.filter((component) =>
+  //     idSelectComponents?.find((id) => id !== component.id)
+  //   );
+  //   setState && setState({ ...state, components: newComponents });
+  // });
 
   return (
     <div>
