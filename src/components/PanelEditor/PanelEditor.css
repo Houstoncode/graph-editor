@@ -1,0 +1,183 @@
+.panel-editor {
+  display: flex;
+  position: absolute;
+  top: 75px;
+  right: 210px;
+}
+
+.panel-editor__items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.panel-editor__small {
+  width: 189px;
+}
+
+.panel-editor__medium {
+  width: 261px;
+}
+
+.panel-editor__large {
+  width: 298px;
+}
+
+.panel-editor__extralarge {
+  width: 450px;
+}
+
+.panel-editor__item {
+  align-items: center;
+  background: #2c2c2c;
+  border: 1px solid #444444;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.panel-item__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 7px 0 0 0;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+}
+
+.panel-item__header span {
+  user-select: none;
+  margin-left: 20px;
+}
+
+.panel-item__header--icon {
+  cursor: pointer;
+  background: url("/img/icons/folding.svg");
+  width: 12px;
+  height: 12px;
+  margin-right: 20px;
+}
+
+.panel-body {
+  margin-top: 10px;
+  margin: 10px 20px 0px 20px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 100%;
+  /* identical to box height, or 14px */
+  text-indent: 5px;
+  color: #ffffff;
+}
+
+.panel-body__item {
+  position: relative;
+  width: 100%;
+  display: flex;
+  margin-top: 15px;
+}
+
+.panel-body__item:last-child {
+  margin-bottom: 16px;
+}
+
+.panel-body__link {
+  user-select: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.panel-body-export__item::after {
+  content: "";
+  position: absolute;
+  padding: 0 2px;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+}
+
+.panel-body-transform__item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel-body-transform__item .panel-body-input__group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-body-input__group input {
+  width: 90%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding: 5px 7px;
+}
+
+.panel-body-input__group input::placeholder {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 100%;
+}
+
+.panel-body-input__group label {
+  user-select: none;
+  margin-bottom: 5px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 100%;
+  /* identical to box height, or 14px */
+
+  text-indent: 3px;
+
+  color: #ffffff;
+}
+
+.--color {
+  width: 100%;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.sketch-picker {
+  font-family: Roboto !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 13px !important;
+  line-height: 100% !important;
+  background: #2c2c2c !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  padding: 0px !important;
+}
+
+.sketch-picker input {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+.sketch-picker span {
+  user-select: none;
+  color: #fff !important;
+}
+
+.flexbox-fix {
+  margin: 0 !important;
+}
