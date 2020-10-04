@@ -59,7 +59,6 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
           });
       },
       href: "",
-      cursor: "default",
       disabled: false,
     },
     {
@@ -70,7 +69,6 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
         console.log("Arrow");
       },
       href: "",
-      cursor: "text",
       disabled: true,
     },
     {
@@ -105,8 +103,7 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
             },
           });
       },
-      cursor: "crosshair",
-      disabled: false,
+      disabled: true,
     },
     {
       iconSrc: "/img/icons/right/link.svg",
@@ -116,7 +113,6 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
         console.log("Arrow");
       },
       href: "",
-      cursor: "text",
       disabled: true,
     },
     {
@@ -134,8 +130,7 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
           });
       },
       href: "",
-      cursor: "text",
-      disabled: false,
+      disabled: true,
     },
     {
       iconSrc: "/img/icons/right/patterns.svg",
@@ -153,7 +148,7 @@ export const RightSidebar: FC<Props> = ({ setState, state, handleScreen }) => {
       },
       href: "",
       cursor: "text",
-      disabled: false,
+      disabled: true,
     },
   ];
   return (
